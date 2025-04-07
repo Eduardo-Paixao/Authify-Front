@@ -1,0 +1,35 @@
+import React, { InputHTMLAttributes } from "react";
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+}
+
+export const Input: React.FC<InputProps> = ({
+  label,
+  error,
+  className,
+  ...props
+}) => {
+  return (
+    <div className={`w-full flex flex-col gap-1 h-[108px] `}>
+      {label && <label className="w-full text-base font-medium">{label}</label>}
+      <input
+        {...props}
+        className={`p-3 h-14 text-base rounded-md w-full bg-[#27272A] outline-[#52525B] outline-2 focus:outline-[#8257E5]
+       ${error ? "outline-red-500 focus:outline-red-500" : ""} ${className}`}
+      />
+      {error && <p className="w-full text-sm text-red-500">{error}</p>}
+    </div>
+  );
+};
+
+export const InputRadio: React.FC<InputProps> = ({ label, ...props }) => {
+  return (
+    <label className="flex flex-col items-center cursor-pointer gap-2">
+      {label && <span className="">{label}</span>}
+      <input type="radio" className="sr-only peer" {...props} />
+      <div className="w-7 h-7 rounded-full border-4 border-[#8257E5] flex items-center justify-center after:content-[''] after:w-3 after:h-3 after:rounded-full after:bg-[#8257E5] after:scale-0 peer-checked:after:scale-100 after:transition-transform" />
+    </label>
+  );
+};

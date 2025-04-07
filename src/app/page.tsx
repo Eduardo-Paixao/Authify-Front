@@ -1,103 +1,93 @@
+"use client";
+import Button from "@/components/Button";
+import {Input} from "@/components/Input";
+import passwordImage from "@/undraw_my-password_iyga.svg";
 import Image from "next/image";
+import { EmblaCarousel } from "@/components/EmblaCarousel";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "@/graphql/mutation/userMutation";
+import { useToastfy } from "@/hooks/useToastfy";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+const schema = z.object({
+  email: z.string().email("E-mail inválido"),
+  password: z.string(),
+});
+type FormData = z.infer<typeof schema>;
+
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+  const { showSuccess, showError } = useToastfy();
+  const {push} = useRouter();
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+    onCompleted(data) {
+      showSuccess(`Bem-vindo, ${data.login.user.name}!`);
+      push('/private/userList')
+    },
+    onError(error) {
+      showError(`${error?.message}`);
+    },
+  });
+
+
+  const onSubmit = (formData: FormData) => {
+    loginUser({
+      variables: {
+        email: formData.email,
+        password: formData.password,
+      },
+    });
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="flex justify-evenly h-screen flex-row p-4">
+        <div className="max-w-[1440px] flex items-center">
+          <EmblaCarousel />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className="flex flex-col gap-4 bg-[#18181B] min-w-[336px] rounded-xl p-4 items-center self-center">
+          <strong>Login</strong>
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src={passwordImage}
+            alt="Login"
+            className="max-w-[269px] max-h-[334px]"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <Input
+            label="E-mail"
+            type="email"
+            title="E-mail"
+            placeholder="E-mail"
+            {...register("email")}
+            error={errors?.email?.message}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <Input
+            label="Senha"
+            type="password"
+            title="Senha"
+            placeholder="Senha"
+            {...register("password")}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              "Entrar"
+            )}
+          </Button>
+
+          <p className="text-xs text-[#A1A1AA]">Feito com ♥ pelo Paixão</p>
+        </div>
+      </div>
+    </form>
   );
 }
