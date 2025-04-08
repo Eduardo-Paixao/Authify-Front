@@ -1,6 +1,6 @@
 "use client";
 import { GET_USERS } from "@/graphql/queries/userQueries";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Image from "next/image";
 import AddUserIcon from "@/undraw_updates_wm27.svg";
 import EditIcon from "@/edit-icon.svg";
@@ -12,31 +12,75 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UPDATE_USER } from "@/graphql/mutation/userMutation";
+import { useToastfy } from "@/hooks/useToastfy";
 
 const schema = z.object({
   name: z
     .string()
     .min(8, "Nome inválido")
-    .max(20, "Nome inválido, utilize apeas nome e sobre nome"),
+    .max(30, "Nome inválido, utilize apeas nome e sobre nome"),
   role: z.enum(["admin", "write", "read"], {
     errorMap: () => ({ message: "Selecione uma opção." }),
   }),
+  email: z.string().email("E-mail inválido"),
 });
 type FormData = z.infer<typeof schema>;
 
+interface UserProps {
+  name: string;
+  email: string;
+  roles: {
+    name: "admin" | "write" | "read";
+    id: number;
+  }[];
+}
+
 export default function userList() {
-  const { data, error } = useQuery(GET_USERS);
+  const { data, refetch } = useQuery(GET_USERS);
+  const { showError, showSuccess } = useToastfy();
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState("1");
   const modalRef = useRef<HTMLDivElement>(null);
   useClickOutside(modalRef, () => setIsOpen(false), isOpen);
+
+  const [UpdateUser, { loading }] = useMutation(UPDATE_USER, {
+    onCompleted(data) {
+      showSuccess(`Usuário, ${data.update.name} alterado com sucesso!`);
+      setIsOpen(false);
+      refetch();
+    },
+    onError(error) {
+      showError(`${error?.message}`);
+    },
+  });
+
   const {
     register,
     handleSubmit,
-    formState: { errors, defaultValues },
+    formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+
+  const onSubmit = (formData: FormData) => {
+    UpdateUser({
+      variables: {
+        name: formData.name,
+        roles: formData.role,
+        email: formData.email,
+      },
+    });
+  };
+
+  const handleUseredit = (user: UserProps) => {
+    reset({
+      name: user.name,
+      role: user.roles[0].name,
+      email: user.email,
+    });
+    setIsOpen(true);
+  };
 
   if (!data) {
     return (
@@ -48,9 +92,6 @@ export default function userList() {
       </div>
     );
   }
-  const onSubmit = (formData: FormData) => {
-    console.log(formData, "aqui");
-  };
 
   return (
     <>
@@ -65,7 +106,7 @@ export default function userList() {
             </tr>
           </thead>
           <tbody>
-            {data?.users?.map((user: any, index: number) => (
+            {data?.users?.map((user: UserProps, index: number) => (
               <tr className="bg-[#27272A] hover:brightness-125" key={index}>
                 <td className="px-4 py-3 rounded-l-lg">{user.name}</td>
                 <td className="px-4 py-3">{user.email}</td>
@@ -74,7 +115,7 @@ export default function userList() {
                   <button
                     type="button"
                     className="cursor-pointer"
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => handleUseredit(user)}
                   >
                     <Image src={EditIcon} alt="editar" />
                   </button>
@@ -87,8 +128,17 @@ export default function userList() {
         <Modal isOpen={isOpen}>
           <div
             ref={modalRef}
-            className="bg-[#27272A] p-4 w-full max-w-xl rounded-2xl"
+            className="bg-[#27272A] p-4 w-full max-w-[400px] rounded-2xl"
           >
+            <section className="flex justify-between pb-4 text-[#A1A1AA]">
+              <span>Alteração de usuários</span>
+              <p
+                onClick={() => setIsOpen(false)}
+                className="w-6 h-6 text-center rounded-sm cursor-pointer hover:brightness-120 hover:bg-[#52525B] hover:text-[#fff] "
+              >
+                X
+              </p>
+            </section>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <Input
                 placeholder="Nome"
@@ -97,26 +147,24 @@ export default function userList() {
                 error={errors?.name?.message}
               />
               <section className="flex gap-4 py-4 justify-center">
-                <InputRadio
-                  label="Admin"
-                  value="admin"
-                  {...register("role")}
-                />
+                <InputRadio label="Admin" value="admin" {...register("role")} />
                 <InputRadio
                   label="Usuário"
                   value="write"
                   {...register("role")}
                 />
-                <InputRadio
-                  label="Editor"
-                  value="read"
-                  {...register("role")}
-                />
+                <InputRadio label="Editor" value="read" {...register("role")} />
               </section>
               <p className="text-red-500 text-sm text-center pb-4 ">
                 {errors.role ? errors.role.message : ""}
               </p>
-              <Button type="submit">Salvar</Button>
+              <Button type="submit" disabled={loading}>
+                {loading ? (
+                  <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  "Salvar"
+                )}
+              </Button>
             </form>
           </div>
         </Modal>

@@ -10,3 +10,13 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+export const UPDATE_USER = gql`
+  mutation UpdateUser($name: String!, $email: String!, $roles: String!) {
+    update(name: $name, email: $email, roles: $roles) {
+      name
+      roles {
+        name
+      }
+    }
+  }
+`;
