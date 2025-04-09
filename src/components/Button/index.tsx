@@ -6,17 +6,19 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   type = "button",
   children,
+  className,
   ...rest
 }) => {
   return (
     <button
       type={type}
       disabled={disabled}
-      className={`rounded-md bg-[#8257E5] w-full h-14 py-4 text-[1rem] font-semibold text-white flex justify-center items-center ${
+      className={`rounded-xl bg-[#8257E5] w-full h-14 py-4 text-[1rem] font-semibold text-white flex justify-center items-center ${
         disabled
           ? "bg-gray-500 cursor-not-allowed "
           : "hover:brightness-120 cursor-pointer"
       }
+      ${className}
       `}
       {...rest}
     >
