@@ -1,9 +1,7 @@
 import Header from "@/components/Header";
 import React, { ReactNode } from "react";
 
-// import { Container } from './styles';
-
-const PrivateLayout = ({children}: { children: ReactNode }) => {
+const PrivateLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />
