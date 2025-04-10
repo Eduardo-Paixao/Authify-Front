@@ -3,6 +3,9 @@ import Button from "@/components/Button";
 import { Input, InputRadio } from "@/components/Input";
 import { useUserForm } from "@/hooks/useUserForm";
 import { FormDataProps } from "../userList/components/types";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "@/graphql/mutation/userMutation";
+import { useToastfy } from "@/hooks/useToastfy";
 
 const addUser = () => {
   const {
@@ -10,9 +13,26 @@ const addUser = () => {
     formState: { errors },
     handleSubmit,
   } = useUserForm(true);
+  const { showError, showSuccess } = useToastfy();
+  const [Register, { loading }] = useMutation(CREATE_USER, {
+    onCompleted(data) {
+      showSuccess(`Usuário, ${data.register.name} cadastrado com sucesso!`);
+    },
+    onError(error) {
+      showError(`${error?.message}`);
+    },
+  });
 
   const onSubmit = (formData: FormDataProps) => {
     console.log(formData, "aqui");
+    Register({
+      variables: {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        roles: formData.roles,
+      },
+    });
   };
   return (
     <>
@@ -54,8 +74,12 @@ const addUser = () => {
           <p className="text-red-500 text-sm text-center h-5 ">
             {errors.roles ? errors.roles.message : ""}
           </p>
-          <Button type="submit" className="max-w-36">
-            Salvar
+          <Button type="submit" disabled={loading} className="max-w-36">
+            {loading ? (
+              <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+            ) : (
+              "Salvar"
+            )}
           </Button>
         </form>
       </div>

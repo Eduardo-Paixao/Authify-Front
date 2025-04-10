@@ -1,7 +1,8 @@
 export interface FormDataProps {
-  name: string;
-  roles: "admin" | "write" | "read";
-  email: string;
+  name?: string;
+  roles?: string | null | undefined;
+  email?: string;
+  password?: string;
 }
 
 export interface EditUserModalProps {
