@@ -8,24 +8,29 @@ export const useUserForm = (requirePassword: boolean = false) => {
       name: z
         .string()
         .min(8, "Nome inválido")
-        .max(30, "Nome inválido, utilize apeas nome e sobre nome"),
-      roles: z.enum(["admin", "write", "read"], {
-        errorMap: () => ({ message: "Selecione uma opção." }),
-      }),
-      email: z.string().email("E-mail inválido"),
+        .max(30, "Nome inválido, utilize apeas nome e sobre nome")
+        .optional(),
+      email: z.string().email("E-mail inválido").optional(),
       password: requirePassword
         ? z.string().min(8, "A senha deve conter pelo menos oito caracteres")
         : z.string().optional(),
-      confirmPassword: z.string().optional(),
+      confirmPassword: z.string().min(1,'Este campo é obrigatório').optional(),
+      roles: z
+      .string()
+      .optional()
+      .nullable()
+      .refine((val) => ["admin", "write", "read"].includes(val!), {
+        message: "Selecione uma opção válida.",
+      }),
     })
-    .refine((data) => {
-      return (
-        !data.password || data.password === data.confirmPassword,
-        {
+    .superRefine(({ password, confirmPassword }, ctx) => {
+      if (password !== confirmPassword) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
           message: "As senhas não coincidem",
           path: ["confirmPassword"],
-        }
-      );
+        });
+      }
     });
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),

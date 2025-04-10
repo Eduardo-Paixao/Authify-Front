@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import Image from "next/image";
-import ArrowPrevCircle from "../../../../public/arrow-prev-circle.svg";
-import ArrowNextCircle from "../../../../public/arrow-next-circle.svg";
+import ArrowPrevCircle from "@/arrow-prev-circle.svg";
+import ArrowNextCircle from "@/arrow-next-circle.svg";
 import { EmblaCarouselType } from "embla-carousel";
 import Button from "@/components/Button";
 
@@ -16,7 +16,7 @@ export const ArrowButtonPrev = ({ emblaApi }: ArrowButtonProps) => {
     <>
       <Button
         title="arrow-left-circle"
-        className="cursor-pointer hover:brightness-120"
+        className="cursor-pointer hover:brightness-120 bg-transparent"
         onClick={scrollPrev}
       >
         <Image alt="arrow-left-circle" src={ArrowPrevCircle} />
@@ -33,7 +33,7 @@ export const ArrowButtonNext = ({ emblaApi }: ArrowButtonProps) => {
     <>
       <Button
         title="arrow-next-circle "
-        className="cursor-pointer hover:brightness-120"
+        className="cursor-pointer hover:brightness-120 bg-transparent"
         onClick={scrollNext}
       >
         <Image alt="arrow-next-circle" src={ArrowNextCircle} />
