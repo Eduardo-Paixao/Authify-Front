@@ -1,16 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
-  const token = req.cookies.get("token")?.value || ''; 
+function decodeJwt(token: string) {
+  try {
+    const payload = token.split(".")[1];
+    const decoded = JSON.parse(atob(payload));
+    return decoded;
+  } catch {
+    return null;
+  }
+}
 
-  if (!token && req.nextUrl.pathname.startsWith("/userList")) {
-    
+export function middleware(req: NextRequest) {
+  const token = req.cookies.get("token")?.value || "";
+
+  const decoded = decodeJwt(token);
+
+  if (!token || !decoded || decoded.exp * 1000 < Date.now()) {
     return NextResponse.redirect(new URL("/", req.url));
   }
+
   return NextResponse.next();
 }
 
-// Define quais rotas o middleware deve afetar (opcional)
 export const config = {
-  matcher: ["/userList"], // Aplica o middleware para todas as subrotas de "/dashboard"
+  matcher: ["/private/:path*"],
 };
