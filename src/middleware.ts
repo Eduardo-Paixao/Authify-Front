@@ -15,8 +15,11 @@ export function middleware(req: NextRequest) {
 
   const decoded = decodeJwt(token);
 
-  if (!token || !decoded || decoded.exp * 1000 < Date.now()) {
+  if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
+  }
+  if (decoded && decoded.user.roles[0].name !== "admin") {
+    return NextResponse.redirect(new URL("/private/userList", req.url));
   }
 
   return NextResponse.next();
