@@ -1,14 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-function decodeJwt(token: string) {
-  try {
-    const payload = token.split(".")[1];
-    const decoded = JSON.parse(atob(payload));
-    return decoded;
-  } catch {
-    return null;
-  }
-}
+import { decodeJwt } from "./utils/generic";
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value || "";
@@ -18,7 +9,7 @@ export function middleware(req: NextRequest) {
   if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
   }
-  if (decoded && decoded.user.roles[0].name !== "admin") {
+  if (decoded && decoded.user.roles[0].name !== "admin" && req.url.match('/private/addUser')) {
     return NextResponse.redirect(new URL("/private/userList", req.url));
   }
 

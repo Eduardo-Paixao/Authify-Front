@@ -5,6 +5,9 @@
   --foreground: #171717;
 }
 
+@theme {
+  --breakpoint-xs: 32rem;
+}
 
 /* #212226
 #0f0d16
@@ -16,7 +19,7 @@
 #fe7bbf */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09090A;
+    --background: #09090a;
     --foreground: #ffffff;
   }
 }

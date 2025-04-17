@@ -24,12 +24,28 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-export const InputRadio: React.FC<InputProps> = ({ label, ...props }) => {
+export const InputRadio: React.FC<InputProps> = ({
+  label,
+  disabled,
+  ...props
+}) => {
   return (
-    <label className="flex flex-col items-center cursor-pointer gap-2">
+    <label
+      className={`flex flex-col items-center gap-2 ${
+        !disabled && "cursor-pointer"
+      }`}
+    >
       {label && <span className="">{label}</span>}
-      <input type="radio" className="sr-only peer" {...props} />
-      <div className="w-7 h-7 rounded-full border-4 border-[#8257E5] flex items-center justify-center after:content-[''] after:w-3 after:h-3 after:rounded-full after:bg-[#8257E5] after:scale-0 peer-checked:after:scale-100 after:transition-transform" />
+      <input
+        type="radio"
+        className="sr-only peer"
+        {...props}
+        disabled={disabled}
+      />
+      <div
+        className={`w-7 h-7 rounded-full border-4 flex items-center justify-center after:content-[''] after:w-3 after:h-3 after:rounded-full after:scale-0 peer-checked:after:scale-100 after:transition-transform
+        ${disabled ? 'border-gray-500' : "border-[#8257E5] after:bg-[#8257E5]"}`}
+      />
     </label>
   );
 };

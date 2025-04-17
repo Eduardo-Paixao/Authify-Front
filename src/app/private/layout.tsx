@@ -1,11 +1,17 @@
 import Header from "@/components/Header";
+import { UserProvider } from "@/contexts/userContext";
+import { cookies } from "next/headers";
 import React, { ReactNode } from "react";
 
-const PrivateLayout = ({ children }: { children: ReactNode }) => {
+const PrivateLayout =  async({ children }: { children: ReactNode }) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value || '';
   return (
     <>
-      <Header />
-      <main>{children}</main>
+      <UserProvider token={token}>
+        <Header />
+        <main>{children}</main>
+      </UserProvider>
     </>
   );
 };

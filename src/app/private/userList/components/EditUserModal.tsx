@@ -6,8 +6,9 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 import { useToastfy } from "@/hooks/useToastfy";
 import { useUserForm } from "@/hooks/useUserForm";
 import { useMutation } from "@apollo/client";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { EditUserModalProps, FormDataProps } from "./types";
+import { UserContext } from "@/contexts/userContext";
 
 const EditUserModal: React.FC<EditUserModalProps> = ({
   isOpen,
@@ -16,14 +17,24 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   refetch,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  useClickOutside(modalRef, () => setIsOpen(false), isOpen);
+  const { showError, showSuccess } = useToastfy();
+  const { roles, email } = useContext(UserContext);
+  const isCurrentUser = email === user?.email;
+  const isUpdatePermission = roles[0].name === 'read' || isCurrentUser;
+
+  useClickOutside(
+    modalRef,
+    () => {
+      setIsOpen(false);
+    },
+    isOpen
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useUserForm(false);
-  const { showError, showSuccess } = useToastfy();
   const [UpdateUser, { loading }] = useMutation(UPDATE_USER, {
     onCompleted(data) {
       showSuccess(`Usuário, ${data.update.name} alterado com sucesso!`);
@@ -84,20 +95,25 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
                   label="Admin"
                   value="admin"
                   {...register("roles")}
+                  disabled={isUpdatePermission}
                 />
                 <InputRadio
                   label="Usuário"
                   value="read"
                   {...register("roles")}
+                  disabled={isUpdatePermission}
                 />
                 <InputRadio
                   label="Editor"
                   value="write"
                   {...register("roles")}
+                  disabled={isUpdatePermission}
                 />
               </section>
               <p className="text-red-500 text-sm text-center pb-4 ">
                 {errors.roles ? errors.roles.message : ""}
+                {isCurrentUser && "Usuários não podem alterar suas permissões"}<br/>
+                {roles[0]?.name === "read" && "Seu usuário não pode alterar as permossões"}
               </p>
               <Button type="submit" disabled={loading}>
                 {loading ? (

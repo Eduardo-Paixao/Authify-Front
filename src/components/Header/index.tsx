@@ -11,24 +11,42 @@ const Header = () => {
   const pathname = usePathname();
 
   const isPageBackgroud = pathname?.startsWith("/private/userList");
-  
+
   return (
     <header className=" bg-[#27272A] w-full flex justify-between px-6 items-end">
       <strong className="text-2xl py-6">Authfy</strong>
       <div className="flex gap-4">
-        <section className={`${isPageBackgroud?'bg-[#52525B]':'bg-[#27272A]'} p-4 rounded-t-xl flex gap-4 hover:brightness-120`}>
-          <Link href={"/private/userList"} className="text-2xl">
+        <Link
+          href={"/private/userList"}
+          className={`${
+            isPageBackgroud ? "bg-[#52525B]" : "bg-[#27272A]"
+          } p-4 rounded-t-xl flex gap-4 hover:brightness-120`}
+        >
+          <p
+            className={`${
+              isPageBackgroud ? "hidden xs:flex" : "hidden"
+            } sm:flex text-sm md:text-xl lg:text-2xl`}
+          >
             Lista de usuários
-          </Link>
+          </p>
           <Image alt="" src={BarIcon} />
-        </section>
-        
-        <section className={`${!isPageBackgroud?'bg-[#52525B]':'bg-[#27272A]'} p-4 rounded-t-xl flex gap-4 hover:brightness-120 `}>
-          <Link href={"/private/addUser"} className="text-2xl">
+        </Link>
+
+        <Link
+          href={"/private/addUser"}
+          className={`${
+            !isPageBackgroud ? "bg-[#52525B]" : "bg-[#27272A]"
+          } p-4 rounded-t-xl flex gap-4 hover:brightness-120`}
+        >
+          <p
+            className={`${
+              isPageBackgroud ? "hidden" : "hidden xs:flex"
+            } sm:flex text-sm md:text-xl lg:text-2xl`}
+          >
             Cadastro de usuários
-          </Link>
+          </p>
           <Image alt="" src={AddUserIcon} />
-        </section>
+        </Link>
       </div>
       <strong className="text-2xl py-6 flex gap-4 items-center">
         Sair <Image alt="" src={LogOut} />
