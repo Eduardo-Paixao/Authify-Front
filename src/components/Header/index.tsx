@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <header className=" bg-[#27272A] w-full flex justify-between px-6 items-end">
-      <strong className="text-2xl py-6">Authfy</strong>
+      <strong className="text-sm md:text-xl lg:text-2xl py-6">Authfy</strong>
       <div className="flex gap-4">
         <Link
           href={"/private/userList"}
@@ -48,8 +48,8 @@ const Header = () => {
           <Image alt="" src={AddUserIcon} />
         </Link>
       </div>
-      <strong className="text-2xl py-6 flex gap-4 items-center">
-        Sair <Image alt="" src={LogOut} />
+      <strong className="text-sm md:text-xl lg:text-2xl py-6 flex gap-4 items-center">
+        <p className="hidden xs:flex">Sair</p> <Image alt="" src={LogOut} className="max-w-8 md:max-w-10 lg:max-w-11"/>
       </strong>
     </header>
   );
