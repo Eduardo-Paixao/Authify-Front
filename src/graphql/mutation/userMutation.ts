@@ -10,6 +10,11 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+export const LOGOUT_USER = gql`
+  mutation logOutUser {
+    logout
+  }
+`;
 export const UPDATE_USER = gql`
   mutation UpdateUser($name: String!, $email: String!, $roles: String!) {
     update(name: $name, email: $email, roles: $roles) {

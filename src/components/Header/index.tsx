@@ -6,9 +6,16 @@ import BarIcon from "@/bar-icon.svg";
 import AddUserIcon from "@/add-user-icon.svg";
 import LogOut from "@/log-out-icon.svg";
 import { usePathname } from "next/navigation";
+import { useMutation } from "@apollo/client";
+import { LOGOUT_USER } from "@/graphql/mutation/userMutation";
 
 const Header = () => {
   const pathname = usePathname();
+  const [logOutUser] = useMutation(LOGOUT_USER, {
+    onError(error) {
+      console.log(error)
+    },
+  });
 
   const isPageBackgroud = pathname?.startsWith("/private/userList");
 
@@ -48,9 +55,18 @@ const Header = () => {
           <Image alt="" src={AddUserIcon} />
         </Link>
       </div>
-      <strong className="text-sm md:text-xl lg:text-2xl py-6 flex gap-4 items-center">
-        <p className="hidden xs:flex">Sair</p> <Image alt="" src={LogOut} className="max-w-8 md:max-w-10 lg:max-w-11"/>
-      </strong>
+      <Link
+        className="text-sm md:text-xl lg:text-2xl py-6 flex gap-4 items-center cursor-pointer"
+        onClick={() => logOutUser()}
+        href='/'
+      >
+        <p className="hidden xs:flex">Sair</p>{" "}
+        <Image
+          alt=""
+          src={LogOut}
+          className="max-w-8 md:max-w-10 lg:max-w-11"
+        />
+      </Link>
     </header>
   );
 };
