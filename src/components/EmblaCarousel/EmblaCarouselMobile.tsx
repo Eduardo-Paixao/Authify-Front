@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
-
 import useEmblaCarousel from "embla-carousel-react";
-
-import Autoplay from "embla-carousel-autoplay";
 import DotButton from "./DotButton/intex";
 import { ArrowButtonNext, ArrowButtonPrev } from "./ArrowButton";
 import Image from "next/image";
@@ -20,28 +17,23 @@ import PrismaIcon from "@/prisma-icon.svg";
 import SQLiteIcon from "@/sqlite-icon.svg";
 import JWTIcon from "@/jwt-icon.svg";
 
-export const EmblaCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: false,
-      dragFree: true,
-    },
-    [Autoplay({ delay: 5000, stopOnMouseEnter: true })]
-  );
+export const EmblaCarouselMobile = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    dragFree: false,
+  });
 
   return (
     <div className=" flex flex-col gap-4 w-full items-center">
-      <div
-        className="overflow-hidden"
-        ref={emblaRef}
-        onMouseLeave={() => {
-          emblaApi?.plugins()?.autoplay.play();
-        }}
-      >
-        <div className="flex gap-6 max-w-[879px]">
-          <div className="flex-shrink-0 w-full relative">
-            <Image alt="banner-first" src={BannerFirst} />
-            <section className="bg-[#fff]/8 max-w-[379px] p-4 rounded-[12px] absolute left-4 top-[77px] text-2xl">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex gap-6 w-full ">
+          <div className="flex-shrink-0 w-full relative ">
+            <Image
+              alt="banner-first"
+              src={BannerFirst}
+              className="w-full min-h-[358px] object-cover"
+            />
+            <section className="bg-[#fff]/8 w-full xs:max-w-[379px] p-4 rounded-[12px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl">
               <p>
                 Olá, eu sou o <strong>Eduardo Paixão</strong>.
               </p>
@@ -49,10 +41,17 @@ export const EmblaCarousel = () => {
               Criei o Authfy com o objetivo de aprimorar meus conhecimentos
               tanto no desenvolvimento Front-End quanto no Back-End.
             </section>
+          </div>
+          <div className="flex-shrink-0 w-full relative">
+            <Image
+              alt="banner-first"
+              src={BannerFirst}
+              className="w-full min-h-[358px] object-cover"
+            />
 
-            <section className="bg-[#fff]/8 max-w-[379px] p-4 rounded-[12px] absolute right-4 top-3.5 text-2xl flex flex-col items-center gap-4">
+            <section className="bg-[#fff]/8 w-full flex flex-col items-center xs:max-w-[379px] p-4 rounded-[12px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl xs:text-2xl">
               <strong>Tecnologias Utilizadas:</strong>
-              <div className="grid grid-cols-[170px_1fr] gap-5 text-xl">
+              <div className="grid grid-cols-[1fr_1fr] gap-5 text-sm xs:text-xl">
                 <section className="flex flex-col gap-2">
                   Front-End:
                   <span className="flex gap-2">
@@ -100,8 +99,12 @@ export const EmblaCarousel = () => {
             </section>
           </div>
           <div className="flex-shrink-0 w-full relative">
-            <Image alt="banner-second" src={BannerSecond} />
-            <section className="bg-[#fff]/8 p-4 rounded-[12px] max-w-[509px] flex flex-col gap-4 absolute right-10 top-[80px] text-2xl">
+            <Image
+              alt="banner-second"
+              src={BannerSecond}
+              className="w-full min-h-[358px] object-cover"
+            />
+            <section className="bg-[#fff]/8 w-full xs:max-w-[379px] p-4 rounded-[12px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl">
               <strong>O que é o Authfy?</strong>
               <span>
                 O Authfy é um sistema completo de gerenciamento de usuários com
@@ -111,28 +114,43 @@ export const EmblaCarousel = () => {
               </span>
             </section>
           </div>
-          <div className="flex-shrink-0 w-full relative">
-            <Image alt="banner-third" src={BannerThird} />
-            <section className="bg-[#fff]/8 p-4 rounded-[12px] max-w-[841px] flex flex-col gap-4 absolute right-[19px] top-[30px] text-[18px] items-center">
+          <div className="flex-shrink-0 w-full relative ">
+            <Image
+              alt="banner-third"
+              src={BannerThird}
+              className="w-full min-h-[358px] object-cover"
+            />
+            <section className="bg-[#fff]/8 w-full xs:max-w-5/6 p-4 rounded-[12px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] xs:text-xl">
               <strong>Funcionalidades principais</strong>
               <p>
-                <strong>Administração de Usuários</strong> – O usuário com permissão de admin
-                pode cadastrar novos usuários e promover outros usuários a
-                administradores.
+                <strong>Administração de Usuários</strong> – O usuário com
+                permissão de admin pode cadastrar novos usuários e promover
+                outros usuários a administradores.
               </p>
               <p>
-                <strong>Busca e Listagem</strong> – Usuários do tipo user podem visualizar e
-                pesquisar outros usuários no sistema.
+                <strong>Busca e Listagem</strong> – Usuários do tipo user podem
+                visualizar e pesquisar outros usuários no sistema.
               </p>
+            </section>
+          </div>
+          <div className="flex-shrink-0 w-full relative ">
+            <Image
+              alt="banner-third"
+              src={BannerThird}
+              className="w-full min-h-[358px] object-cover"
+            />
+            <section className="bg-[#fff]/8 w-full xs:max-w-5/6 p-4 rounded-[12px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] xs:text-xl">
+              <strong>Funcionalidades principais</strong>
               <p>
-                <strong>Edição de Informações</strong> – Usuários com permissão de editor
-                podem modificar determinados atributos de outros usuários, como
-                o nome.
+                <strong>Edição de Informações</strong> – Usuários com permissão
+                de editor podem modificar determinados atributos de outros
+                usuários, como o nome.
               </p>
-              <strong>Com o Authfy, a gestão de usuários se torna mais
-                simples, segura e organizada, garantindo um controle preciso
-                sobre quem pode acessar e modificar informações dentro do
-                sistema.</strong>
+              <strong>
+                Com o Authfy, a gestão de usuários se torna mais simples, segura
+                e organizada, garantindo um controle preciso sobre quem pode
+                acessar e modificar informações dentro do sistema.
+              </strong>
             </section>
           </div>
         </div>

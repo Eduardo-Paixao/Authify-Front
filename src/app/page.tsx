@@ -3,7 +3,8 @@ import Button from "@/components/Button";
 import {Input} from "@/components/Input";
 import passwordImage from "@/undraw_my-password_iyga.svg";
 import Image from "next/image";
-import { EmblaCarousel } from "@/components/EmblaCarousel";
+import { EmblaCarouselDesktop } from "@/components/EmblaCarousel/EmblaCarouselDesktop";
+import { EmblaCarouselMobile } from "@/components/EmblaCarousel/EmblaCarouselMobile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -50,11 +51,14 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="flex justify-evenly h-screen flex-row p-4">
-        <div className="max-w-[1440px] flex items-center">
-          <EmblaCarousel />
+      <div className="flex justify-evenly h-screen p-4 flex-col xl:flex-row">
+        <div className="hidden xl:flex max-w-[1440px] items-center">
+          <EmblaCarouselDesktop />
         </div>
-        <div className="flex flex-col gap-4 bg-[#18181B] min-w-[336px] rounded-xl p-4 items-center self-center">
+        <div className="flex xl:hidden w-full items-center">
+          <EmblaCarouselMobile />
+        </div>
+        <div className="flex flex-col gap-4 bg-[#18181B] w-full xl:max-w-[336px] rounded-xl p-4 items-center self-center">
           <strong>Login</strong>
           <Image
             src={passwordImage}
