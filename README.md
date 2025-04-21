@@ -2,6 +2,10 @@
 
 Authify é um gerenciador de usuários que fornece uma interface intuitiva para administração de contas e permissões. Este repositório contém o frontend do projeto, desenvolvido com React, TypeScript, Next.js, GraphQL e Tailwind CSS.
 
+**Acesse o Authify pelo o link abaixo:**
+
+   Acesse [https://authify-front.vercel.app/](https://authify-front.vercel.app/) para visualizar o projeto em produção.
+
 ## Índice
 
 - [Começando](#começando)
