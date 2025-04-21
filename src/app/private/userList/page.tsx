@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import Image from "next/image";
 import AddUserIcon from "@/undraw_updates_wm27.svg";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { UserProps } from "@/types/generic";
 import Table from "./components/Table";
@@ -21,6 +21,10 @@ export default function userList() {
     setUser(user);
     setIsOpen(true);
   };
+
+  useEffect(() => {
+    refetch()
+  }, []);
 
   if (!data) {
     return (

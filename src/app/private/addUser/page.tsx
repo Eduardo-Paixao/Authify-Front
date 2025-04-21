@@ -6,6 +6,7 @@ import { FormDataProps } from "../userList/components/types";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "@/graphql/mutation/userMutation";
 import { useToastfy } from "@/hooks/useToastfy";
+import { useRouter } from "next/navigation";
 
 const addUser = () => {
   const {
@@ -14,9 +15,11 @@ const addUser = () => {
     handleSubmit,
   } = useUserForm(true);
   const { showError, showSuccess } = useToastfy();
+  const {push} = useRouter()
   const [Register, { loading }] = useMutation(CREATE_USER, {
     onCompleted(data) {
       showSuccess(`Usuário, ${data.register.name} cadastrado com sucesso!`);
+      push('/private/userList')
     },
     onError(error) {
       showError(`${error?.message}`);
@@ -24,7 +27,6 @@ const addUser = () => {
   });
 
   const onSubmit = (formData: FormDataProps) => {
-    console.log(formData, "aqui");
     Register({
       variables: {
         name: formData.name,
