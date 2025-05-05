@@ -5,18 +5,12 @@ import { useRouter } from "next/navigation";
 
 import LogoDev from "@/logo-dev.svg";
 import ArrowNextCircle from "@/arrow-next-circle.svg";
-import ToggleThemeButton from "@/components/ToggleThemeButton";
-import ImgeBackground from "@/components/ImgeBackground";
-import { useTheme } from "@/hooks/useTheme";
 
 export default function Home() {
   const { push } = useRouter();
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <div>
-      <ToggleThemeButton toggleTheme={toggleTheme} />
-      <ImgeBackground theme={theme === "dark"} />
       <div className="flex w-full md:h-screen  justify-center items-center flex-col p-4">
         <div className="w-full max-w-[1440px] flex flex-col md:flex-row max-h-[calc(100vh-88px)] items-center bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
           <Image
