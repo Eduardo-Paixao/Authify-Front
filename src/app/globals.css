@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@custom-variant dark (&:where(.dark, .dark *));
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -30,5 +30,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Kdam Thmor Pro, Helvetica, sans-serif;
 }

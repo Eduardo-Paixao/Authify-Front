@@ -3,22 +3,11 @@ import React from "react";
 
 import useEmblaCarousel from "embla-carousel-react";
 
-import Autoplay from "embla-carousel-autoplay";
 import DotButton from "./DotButton/intex";
 import { ArrowButtonNext, ArrowButtonPrev } from "./ArrowButton";
 import Image from "next/image";
-import BannerFirst from "@/banner-first.svg";
-import BannerSecond from "@/banner-second.svg";
-import BannerThird from "@/banner-third.svg";
-import ReactIcon from "@/react-icon.svg";
-import TypeScriptIcon from "@/type-script-icon.svg";
-import NextIcon from "@/next-icon.svg";
-import TailwindCSSIcon from "@/tailwind-icon.svg";
-import GraphQLIcon from "@/graphql-icon.svg";
-import NodeIcon from "@/node-icon.svg";
-import PrismaIcon from "@/prisma-icon.svg";
-import SQLiteIcon from "@/sqlite-icon.svg";
-import JWTIcon from "@/jwt-icon.svg";
+import ArrowReactIcongif from "@/arrow-react-icon.gif";
+import FormLogin from "@/app/Login/components/FormLogin";
 
 export const EmblaCarouselDesktop = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -27,105 +16,173 @@ export const EmblaCarouselDesktop = () => {
   });
 
   return (
-    <div className=" flex flex-col gap-4 w-full items-center">
+    <div className="flex flex-col gap-4 w-full items-center">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-6 max-w-[879px]">
-          <div className="flex-shrink-0 w-full relative">
-            <Image alt="banner-first" src={BannerFirst} />
-            <section className="bg-[#fff]/8 max-w-[379px] p-4 rounded-[12px] absolute left-4 top-[77px] text-2xl">
-              <p>
-                Olá, eu sou o <strong>Eduardo Paixão</strong>.
-              </p>
-              <br />
-              Criei o Authfy com o objetivo de aprimorar meus conhecimentos
-              tanto no desenvolvimento Front-End quanto no Back-End.
-            </section>
-
-            <section className="bg-[#fff]/8 max-w-[379px] p-4 rounded-[12px] absolute right-4 top-3.5 text-2xl flex flex-col items-center gap-4">
-              <strong>Tecnologias Utilizadas:</strong>
-              <div className="grid grid-cols-[170px_1fr] gap-5 text-xl">
-                <section className="flex flex-col gap-2">
-                  Front-End:
-                  <span className="flex gap-2">
-                    <Image alt="React" src={ReactIcon} /> React,
+        <div className="flex w-[calc(100vw-64px)] max-w-[1440px] gap-6 text-[#000]">
+          <div className="flex-shrink-0 w-full relative justify-items-center">
+            <strong className="w-full flex p-4 justify-center text-5xl dark:text-[#fff]">
+              Tecnologias Utilizadas
+            </strong>
+            <section className="w-full h-[calc(100vh-275px)] p-4 flex flex-col items-center gap-4 bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
+              <div className="gap-5 text-4xl flex w-full max-w-[1220px] h-screen max-h-[647px] justify-between">
+                <section className="flex flex-col gap-2 relative w-full">
+                  <span className="flex gap-2 absolute top-[50%] left-[15%] border-[#8257E5] rounded-2xl border-4 p-3">
+                    Front-End
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="TypeScript" src={TypeScriptIcon} /> TypeScript,
+                  <span className="flex gap-2 absolute top-[30%] left-[5%]">
+                    React
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="Next.js" src={NextIcon} /> Next.js,
+                  <Image
+                    alt="ArrowReactIcon"
+                    className="absolute top-[36%] right-[77%] w-[20%] rotate-124"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute bottom-[20%]">
+                    TypeScript
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="TailwindCSS" src={TailwindCSSIcon} />
-                    TailwindCSS,
+                  <Image
+                    alt="ArrowTypeScriptIcon"
+                    className="absolute bottom-[26%] right-[80%] w-[20%] rotate-76 -scale-x-100"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute bottom-[20%] right-[45%]">
+                    Next.js
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="GraphQL" src={GraphQLIcon} /> GraphQL.
+                  <Image
+                    alt="ArrowNextIcon"
+                    className="absolute bottom-[26%] right-[44%] w-[18%] -rotate-55"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute top-[59%] left-[55%]">
+                    TailwindCSS
                   </span>
+                  <Image
+                    alt="ArrowTailwindCSSIcon"
+                    className="absolute top-[48%] right-[35%] w-[20%] rotate-257"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute top-[38%] left-[50%]">
+                    GraphQL
+                  </span>
+                  <Image
+                    alt="ArrowGraphQLIcon"
+                    className="absolute top-[38%] right-[46%] w-[20%] rotate-190"
+                    src={ArrowReactIcongif}
+                  />
                 </section>
-                <section className="flex flex-col gap-2">
-                  Back-End:
-                  <span className="flex gap-2">
-                    <Image alt="Node.js" src={NodeIcon} /> Node.js,
+                <section className="flex flex-col gap-2 relative w-full">
+                  <span className="flex gap-2 absolute top-[30%] right-[30%] border-[#8257E5] rounded-2xl border-4 p-3">
+                    Back-End
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="TypeScript" src={TypeScriptIcon} /> TypeScript,
+                  <span className="flex gap-2 absolute top-[10%] left-[30%]">
+                    Node.js
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="Next.js" src={NextIcon} /> Next.js,
+                  <Image
+                    alt="ArrowNodeIcon"
+                    className="absolute top-[17%] left-[30%] w-[18%] rotate-135"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute bottom-[40%] left-[15%]">
+                    TypeScript
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="Prisma" src={PrismaIcon} /> Prisma,
+                  <Image
+                    alt="ArrowTypeScriptIcon"
+                    className="absolute bottom-[46%] left-[27%] w-[20%] rotate-65 -scale-x-100"
+                    src={ArrowReactIcongif}
+                  />
+
+                  <span className="flex gap-2 absolute bottom-[40%] right-[18%]">
+                    Prisma
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="SQLite" src={SQLiteIcon} /> SQLite,
+                  <Image
+                    alt="ArrowPrismaIcon"
+                    className="absolute bottom-[46%] right-[17%] w-[20%] -rotate-66"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute top-[37%] right-0">
+                    Postgres
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="GraphQL" src={GraphQLIcon} /> GraphQL,
+                  <Image
+                    alt="ArrowPostgresIcon"
+                    className="absolute top-[28%] right-[12%] w-[20%] rotate-250"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute top-[18%] right-[10%]">
+                    GraphQL
                   </span>
-                  <span className="flex gap-2">
-                    <Image alt="JWT" src={JWTIcon} /> JWT.
+                  <Image
+                    alt="ArrowGraphQLIcon"
+                    className="absolute top-[18%] right-[30%] w-[20%] rotate-190"
+                    src={ArrowReactIcongif}
+                  />
+                  <span className="flex gap-2 absolute top-[40%] left-[20%] ">
+                    JWT
                   </span>
+                  <Image
+                    alt="ArrowJWTIcon"
+                    className="absolute top-[31%] left-[22%] w-[17%] rotate-120 -scale-x-100"
+                    src={ArrowReactIcongif}
+                  />
                 </section>
               </div>
             </section>
           </div>
-          <div className="flex-shrink-0 w-full relative">
-            <Image alt="banner-second" src={BannerSecond} />
-            <section className="bg-[#fff]/8 p-4 rounded-[12px] max-w-[509px] flex flex-col gap-4 absolute right-10 top-[80px] text-2xl">
-              <strong>O que é o Authfy?</strong>
+          <div className="flex-shrink-0 w-full relative justify-items-center">
+            <strong className="w-full flex p-4 justify-center text-5xl dark:text-[#fff]">
+              O que é o Authfy?
+            </strong>
+            <section className="w-full h-[calc(100vh-275px)] flex items-center text-line text-5xl/18 p-4 bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
               <span>
-                O Authfy é um sistema completo de gerenciamento de usuários com
-                permissões avançadas. Ele permite que administradores controlem
-                o acesso dos usuários dentro da plataforma de forma intuitiva e
-                eficiente.
+                O Authfy é uma solução completa para o gerenciamento de
+                usuários, oferecendo controle avançado de permissões e níveis de
+                acesso. Com uma interface intuitiva e eficiente, a plataforma
+                permite que administradores configurem e gerenciem facilmente os
+                acessos dos usuários, garantindo segurança, organização e
+                flexibilidade dentro do sistema.
               </span>
             </section>
           </div>
-          <div className="flex-shrink-0 w-full relative">
-            <Image alt="banner-third" src={BannerThird} />
-            <section className="bg-[#fff]/8 p-4 rounded-[12px] max-w-[841px] flex flex-col gap-4 absolute right-[19px] top-[30px] text-[18px] items-center">
-              <strong>Funcionalidades principais</strong>
+          <div className="flex-shrink-0 w-full relative justify-items-center">
+            <strong className="w-full flex p-4 justify-center text-5xl dark:text-[#fff]">
+              Funcionalidades Principais
+            </strong>
+            <section className="w-full h-[calc(100vh-275px)] justify-evenly items-center text-4xl/11 p-8  flex flex-col bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
               <p>
-                <strong>Administração de Usuários</strong> – O usuário com
-                permissão de admin pode cadastrar novos usuários e promover
-                outros usuários a administradores.
+                <strong>
+                  <span className="text-[#8257E5]">{"<>"}</span> Administração
+                  de Usuários
+                </strong>{" "}
+                – O usuário com permissão de admin pode cadastrar novos usuários
+                e promover outros usuários a administradores.
               </p>
               <p>
-                <strong>Busca e Listagem</strong> – Usuários do tipo user podem
-                visualizar e pesquisar outros usuários no sistema.
+                <strong>
+                  <span className="text-[#8257E5]">{"<>"}</span> Busca e
+                  Listagem
+                </strong>{" "}
+                – Usuários do tipo user podem visualizar e pesquisar outros
+                usuários no sistema.
               </p>
               <p>
-                <strong>Edição de Informações</strong> – Usuários com permissão
-                de editor podem modificar determinados atributos de outros
-                usuários, como o nome.
+                <strong>
+                  <span className="text-[#8257E5]">{"<>"}</span> Edição de
+                  Informações
+                </strong>{" "}
+                – Usuários com permissão de editor podem modificar determinados
+                atributos de outros usuários, como o nome.
               </p>
-              <strong>
+              <p>
+                <strong>
+                  <span className="text-[#8257E5]">{"<>"}</span>{" "}
+                </strong>
                 Com o Authfy, a gestão de usuários se torna mais simples, segura
                 e organizada, garantindo um controle preciso sobre quem pode
                 acessar e modificar informações dentro do sistema.
-              </strong>
+              </p>
             </section>
+          </div>
+          <div className="flex-shrink-0 w-full relative justify-items-center">
+            <FormLogin />
           </div>
         </div>
       </div>

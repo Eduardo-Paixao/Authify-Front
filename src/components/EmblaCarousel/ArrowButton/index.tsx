@@ -15,11 +15,11 @@ export const ArrowButtonPrev = ({ emblaApi }: ArrowButtonProps) => {
   return (
     <>
       <Button
-        title="arrow-left-circle"
+        title="arrow-prev-circle"
         className="cursor-pointer hover:brightness-120 bg-transparent"
         onClick={scrollPrev}
       >
-        <Image alt="arrow-left-circle" src={ArrowPrevCircle} />
+        <Image alt="arrow-prev-circle" src={ArrowPrevCircle} />
       </Button>
     </>
   );

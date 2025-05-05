@@ -16,7 +16,7 @@ export const Input: React.FC<InputProps> = ({
       {label && <label className="w-full text-base font-medium">{label}</label>}
       <input
         {...props}
-        className={`p-3 h-14 text-base rounded-md w-full bg-[#27272A] outline-[#52525B] outline-2 focus:outline-[#8257E5]
+        className={`p-3 h-14 text-base text-[#A1A1AA] rounded-md w-full bg-[#27272A] outline-[#52525B] outline-2 focus:outline-[#8257E5]
        ${error ? "outline-red-500 focus:outline-red-500" : ""} ${className}`}
       />
       {error && <p className="w-full text-sm text-red-500">{error}</p>}

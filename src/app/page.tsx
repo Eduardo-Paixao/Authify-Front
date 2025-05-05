@@ -1,97 +1,55 @@
 "use client";
 import Button from "@/components/Button";
-import {Input} from "@/components/Input";
-import passwordImage from "@/undraw_my-password_iyga.svg";
 import Image from "next/image";
-import { EmblaCarouselDesktop } from "@/components/EmblaCarousel/EmblaCarouselDesktop";
-import { EmblaCarouselMobile } from "@/components/EmblaCarousel/EmblaCarouselMobile";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "@/graphql/mutation/userMutation";
-import { useToastfy } from "@/hooks/useToastfy";
 import { useRouter } from "next/navigation";
 
-const schema = z.object({
-  email: z.string().email("E-mail inválido"),
-  password: z.string(),
-});
-type FormData = z.infer<typeof schema>;
+import LogoDev from "@/logo-dev.svg";
+import ArrowNextCircle from "@/arrow-next-circle.svg";
 
-export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
-  const { showSuccess, showError } = useToastfy();
-  const {push} = useRouter();
-  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-    onCompleted(data) {
-      showSuccess(`Bem-vindo, ${data.login.user.name}!`);
-      push('/private/userList')
-    },
-    onError(error) {
-      showError(`${error?.message}`);
-    },
-  });
-
-
-  const onSubmit = (formData: FormData) => {
-    loginUser({
-      variables: {
-        email: formData.email,
-        password: formData.password,
-      },
-    });
-  };
+export default function Home() {
+  const { push } = useRouter();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="flex justify-evenly h-screen p-4 flex-col xl:flex-row">
-        <div className="hidden xl:flex max-w-[1440px] items-center">
-          <EmblaCarouselDesktop />
-        </div>
-        <div className="flex xl:hidden w-full items-center">
-          <EmblaCarouselMobile />
-        </div>
-        <div className="flex flex-col gap-4 bg-[#18181B] w-full xl:max-w-[336px] rounded-xl p-4 items-center self-center">
-          <strong>Login</strong>
+    <div>
+      <div className="flex w-full md:h-screen  justify-center items-center flex-col p-4">
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row max-h-[calc(100vh-88px)] items-center bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
           <Image
-            src={passwordImage}
-            alt="Login"
-            className="max-w-[269px] max-h-[334px]"
+            alt="banner-second"
+            src={LogoDev}
+            className="w-[200px] sm:w-[300px]"
           />
-          <Input
-            label="E-mail"
-            type="email"
-            title="E-mail"
-            placeholder="E-mail"
-            {...register("email")}
-            error={errors?.email?.message}
-          />
-          <Input
-            label="Senha"
-            type="password"
-            title="Senha"
-            placeholder="Senha"
-            {...register("password")}
-          />
-
-          <Button type="submit" disabled={loading}>
-            {loading ? (
-              <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
-            ) : (
-              "Entrar"
-            )}
-          </Button>
-
-          <p className="text-xs text-[#A1A1AA]">Feito com ♥ pelo Paixão</p>
+          <section className="p-4 mb-8 w-full flex flex-col gap-4 xs:text-xl sm:text-2xl text-[#000] overflow-auto text-ellipsis ">
+            <strong>
+              Olá, eu sou o{" "}
+              <span className="text-[#8257E5]">Eduardo Paixão.</span>
+            </strong>
+            <span>
+              Graduado em Ciência da Computação pela Unigrande (Centro
+              Universitário da Grande Fortaleza). Atuo como Desenvolvedor
+              Front-End com mais de quatro anos de experiência, especializado em
+              React, TypeScript, Next.js, GraphQL, Prisma e Node.js.
+            </span>
+            <span>
+              Tenho foco em criar interfaces performáticas, acessíveis e
+              escaláveis. Sou proativo, comunicativo e colaborativo, sempre
+              buscando aprimorar minhas habilidades e contribuir efetivamente em
+              equipes de desenvolvimento. Atualmente, estou estudando inglês
+              para expandir minhas oportunidades profissionais.
+            </span>
+          </section>
         </div>
+        <Button
+          title="arrow-prev-circle"
+          className="cursor-pointer hover:brightness-120 bg-transparent"
+          onClick={() => push("Login")}
+        >
+          <Image
+            alt="arrow-prev-circle"
+            src={ArrowNextCircle}
+            className="xs:w-10"
+          />
+        </Button>
       </div>
-    </form>
+    </div>
   );
 }
