@@ -8,19 +8,22 @@ import LogOut from "@/log-out-icon.svg";
 import { usePathname } from "next/navigation";
 import { useMutation } from "@apollo/client";
 import { LOGOUT_USER } from "@/graphql/mutation/userMutation";
+import ToggleThemeButton from "../ToggleThemeButton";
+import { useTheme } from "@/hooks/useTheme";
 
 const Header = () => {
   const pathname = usePathname();
+  const { toggleTheme } = useTheme();
   const [logOutUser] = useMutation(LOGOUT_USER, {
     onError(error) {
-      console.log(error)
+      console.log(error);
     },
   });
 
   const isPageBackgroud = pathname?.startsWith("/private/userList");
 
   return (
-    <header className=" bg-[#27272A] w-full flex justify-between px-6 items-end">
+    <header className="bg-[#27272A] w-full flex justify-between px-6 items-end">
       <strong className="text-sm md:text-xl lg:text-2xl py-6">Authfy</strong>
       <div className="flex gap-4">
         <Link
@@ -55,18 +58,21 @@ const Header = () => {
           <Image alt="" src={AddUserIcon} />
         </Link>
       </div>
-      <Link
-        className="text-sm md:text-xl lg:text-2xl py-6 flex gap-4 items-center cursor-pointer"
-        onClick={() => logOutUser()}
-        href='/'
-      >
-        <p className="hidden xs:flex">Sair</p>{" "}
-        <Image
-          alt=""
-          src={LogOut}
-          className="max-w-8 md:max-w-10 lg:max-w-11"
-        />
-      </Link>
+      <div className="flex gap-4 justify-center items-center">
+        <Link
+          className="text-sm md:text-xl lg:text-2xl py-6 flex gap-4 items-center cursor-pointer"
+          onClick={() => logOutUser()}
+          href="/"
+        >
+          <p className="hidden xs:flex">Sair</p>{" "}
+          <Image
+            alt=""
+            src={LogOut}
+            className="max-w-8 md:max-w-10 lg:max-w-11"
+          />
+        </Link>
+        <ToggleThemeButton toggleTheme={toggleTheme} />
+      </div>
     </header>
   );
 };

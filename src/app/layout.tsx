@@ -9,11 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
 import ImgeBackground from "@/components/ImgeBackground";
 import { useTheme } from "@/hooks/useTheme";
+import { usePathname } from "next/navigation";
 
 const KdamThmorPro = Kdam_Thmor_Pro({
-  weight:"400",
-  subsets:["latin"]
-})
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -21,13 +22,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const { theme, toggleTheme } = useTheme();
+  const isPrivatePage = usePathname().startsWith("/private");
+
   return (
     <html lang="pt-BR" className={KdamThmorPro.className}>
       <body>
         <ApolloProvider client={client}>
           <ToastContextProvider>
-            <ToggleThemeButton toggleTheme={toggleTheme} />
-            <ImgeBackground theme={theme === "dark"} />
+            {!isPrivatePage && (
+              <>
+                <div className="absolute top-4 right-4 z-10">
+                  <ToggleThemeButton toggleTheme={toggleTheme} />
+                </div>
+                <ImgeBackground theme={theme === "dark"} />
+              </>
+            )}
             {children}
             <ToastContainer theme="dark" />
           </ToastContextProvider>

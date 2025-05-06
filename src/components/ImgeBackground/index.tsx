@@ -9,11 +9,13 @@ interface ImgeBackgroundProps {
 
 const ImgeBackground: React.FC<ImgeBackgroundProps> = ({ theme }) => {
   return (
-    <Image
-      src={theme ? BackgroundHomeDark : BackgroundHome}
-      alt=""
-      className="opacity-80 dark:opacity-50 absolute -z-10 object-cover w-full h-screen"
-    />
+    <div className="bg-[#09090a] w-full h-screen  absolute -z-10">
+      <Image
+        src={theme ? BackgroundHomeDark : BackgroundHome}
+        alt=""
+        className="opacity-80 dark:opacity-50 object-cover w-full h-screen"
+      />
+    </div>
   );
 };
 

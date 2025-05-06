@@ -10,7 +10,7 @@ const ToggleThemeButton:React.FC<ToggleThemeButtonProps> = ({toggleTheme}) => {
     <Button
       title="arrow-left-circle"
       onClick={toggleTheme}
-      className="flex items-center bg-[#ffffff] dark:bg-[#52525B] !rounded-full px-1 transition-colors !h-6 !w-auto absolute top-4 right-4 z-10"
+      className="flex items-center bg-[#ffffff] dark:bg-[#52525B] !rounded-full px-1 transition-colors !h-6 !w-auto"
     >
       <span className={`transition-opacity opacity-0 dark:opacity-100`}>
         ☀️

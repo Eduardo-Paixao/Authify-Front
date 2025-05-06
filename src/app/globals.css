@@ -1,28 +1,19 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
 @theme {
   --breakpoint-xs: 32rem;
 }
 
-/* #212226
-#0f0d16
-#241f34
-#38304c
-#313866
-#504099
-#974ec3
-#fe7bbf */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090a;
-    --foreground: #ffffff;
-  }
+:root {
+  --background: #f1f1f1;
+  --foreground: #ffffff;
 }
+.dark {
+  --background: #09090a;
+  --foreground: #ffffff;
+}
+
 * {
   @apply transition-all duration-200 ease-linear;
 }
