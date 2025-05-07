@@ -8,7 +8,7 @@ const Table: React.FC<TableProps> = ({ users, handleUseredit }) => {
   return (
     <div className="overflow-auto w-full sm:flex sm:justify-center">
       <table className="w-full bg-[#e1e1e1] dark:bg-[#18181B] max-w-3xl text-center border-separate border-spacing-y-4 rounded-2xl p-4 pt-0 drop-shadow-xl">
-        <thead className="text-[#09090a] dark:text-[#ffffff]">
+        <thead className="text-[#553a93] dark:text-[#ffffff]">
           <tr>
             <th className="px-4 py-2">Nome</th>
             <th className="px-4 py-2">E-mail</th>

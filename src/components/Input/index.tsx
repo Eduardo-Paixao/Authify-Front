@@ -12,7 +12,7 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={`w-full flex flex-col gap-1 h-[108px] text-[#8257E5] dark:text-[#A1A1AA] `}>
+    <div className={`w-full flex flex-col gap-1 h-[108px] text-[#553a93] dark:text-[#A1A1AA] `}>
       {label && <label className="w-full text-base font-medium">{label}</label>}
       <input
         {...props}
@@ -35,7 +35,7 @@ export const InputRadio: React.FC<InputProps> = ({
         !disabled && "cursor-pointer"
       }`}
     >
-      {label && <span className="text-[#8257E5] dark:text-[#A1A1AA] ">{label}</span>}
+      {label && <span className="text-[#553a93] dark:text-[#A1A1AA] ">{label}</span>}
       <input
         type="radio"
         className="sr-only peer"
