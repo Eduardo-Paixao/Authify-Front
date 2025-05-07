@@ -23,13 +23,13 @@ const Header = () => {
   const isPageBackgroud = pathname?.startsWith("/private/userList");
 
   return (
-    <header className="bg-[#27272A] w-full flex justify-between px-6 items-end">
+    <header className="bg-[#6141ad] dark:bg-[#27272A] w-full flex justify-between px-6 items-end">
       <strong className="text-sm md:text-xl lg:text-2xl py-6">Authfy</strong>
       <div className="flex gap-4">
         <Link
           href={"/private/userList"}
           className={`${
-            isPageBackgroud ? "bg-[#52525B]" : "bg-[#27272A]"
+            isPageBackgroud ? "bg-[#553a93] dark:bg-[#52525B]" : "bg-[#6141ad] dark:bg-[#27272A]"
           } p-4 rounded-t-xl flex gap-4 hover:brightness-120`}
         >
           <p
@@ -45,7 +45,7 @@ const Header = () => {
         <Link
           href={"/private/addUser"}
           className={`${
-            !isPageBackgroud ? "bg-[#52525B]" : "bg-[#27272A]"
+            !isPageBackgroud ? "bg-[#553a93] dark:bg-[#52525B]" : "bg-[#6141ad] dark:bg-[#27272A]"
           } p-4 rounded-t-xl flex gap-4 hover:brightness-120`}
         >
           <p

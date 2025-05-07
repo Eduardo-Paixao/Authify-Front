@@ -41,7 +41,7 @@ const addUser = () => {
       <div className="flex justify-center">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex w-full flex-col bg-[#27272A] gap-4 p-5 mt-9 max-w-xl items-center rounded-2xl"
+          className="flex w-full flex-col bg-[#e1e1e1] dark:bg-[#27272A] gap-4 p-5 mt-9 max-w-xl items-center rounded-2xl drop-shadow-xl"
         >
           <Input
             label="Nome"

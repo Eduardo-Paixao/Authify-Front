@@ -7,8 +7,8 @@ import { TableProps } from "./types";
 const Table: React.FC<TableProps> = ({ users, handleUseredit }) => {
   return (
     <div className="overflow-auto w-full sm:flex sm:justify-center">
-      <table className="w-full bg-[#18181B] max-w-3xl text-center border-separate border-spacing-y-4 rounded-2xl p-4 pt-0">
-        <thead>
+      <table className="w-full bg-[#e1e1e1] dark:bg-[#18181B] max-w-3xl text-center border-separate border-spacing-y-4 rounded-2xl p-4 pt-0 drop-shadow-xl">
+        <thead className="text-[#09090a] dark:text-[#ffffff]">
           <tr>
             <th className="px-4 py-2">Nome</th>
             <th className="px-4 py-2">E-mail</th>
@@ -18,7 +18,7 @@ const Table: React.FC<TableProps> = ({ users, handleUseredit }) => {
         </thead>
         <tbody>
           {users?.map((user: UserProps, index: number) => (
-            <tr className="bg-[#27272A] hover:brightness-125 " key={index}>
+            <tr className="bg-[#553a93] dark:bg-[#27272A] hover:brightness-125 " key={index}>
               <td className="px-4 py-3 rounded-l-lg overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px]">
                 {user.name}
               </td>
