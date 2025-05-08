@@ -69,16 +69,16 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   return (
     <>
       {isOpen && (
-        <div className="bg-[#09090a8a] absolute w-full -top-32 h-[100vh] flex justify-center items-center ">
+        <div className="bg-[#09090a8a] absolute w-full top-[-113px] h-[100vh] flex justify-center items-center ">
           <div
             ref={modalRef}
-            className="bg-[#27272A] p-4 w-full max-w-[400px] rounded-2xl"
+            className="bg-[#f1f1f1] dark:bg-[#27272A] p-4 w-full max-w-[400px] rounded-2xl"
           >
-            <section className="flex justify-between pb-4 text-[#A1A1AA]">
+            <section className="flex justify-between pb-4 text-[#553a93] dark:text-[#A1A1AA]">
               <span>Alteração de usuários</span>
               <p
                 onClick={() => setIsOpen(false)}
-                className="w-6 h-6 text-center rounded-sm cursor-pointer hover:brightness-120 hover:bg-[#52525B] hover:text-[#fff] "
+                className="w-6 h-6 text-center rounded-sm cursor-pointer hover:brightness-120 hover:bg-red-500 dark:hover:bg-[#52525B] hover:text-[#fff] "
               >
                 X
               </p>

@@ -3,20 +3,22 @@ import React, { InputHTMLAttributes } from "react";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  classNameLabel?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
   label,
   error,
   className,
+  classNameLabel,
   ...props
 }) => {
   return (
     <div className={`w-full flex flex-col gap-1 h-[108px] text-[#553a93] dark:text-[#A1A1AA] `}>
-      {label && <label className="w-full text-base font-medium">{label}</label>}
+      {label && <label className={`w-full text-base font-medium ${classNameLabel}`}>{label}</label>}
       <input
         {...props}
-        className={`p-3 h-14 text-base rounded-md w-full bg-[#f2f2f2] dark:bg-[#27272A] outline-[#A1A1AA] dark:outline-[#52525B] outline-2 focus:outline-[#8257E5]
+        className={`p-3 h-14 text-base rounded-md w-full outline-2 bg-[#ededed] dark:bg-[#27272A] outline-[#A1A1AA] dark:outline-[#52525B]  focus:!outline-[#8257E5]
        ${error ? "outline-red-500 focus:outline-red-500" : ""} ${className}`}
       />
       {error && <p className="w-full text-sm text-red-500">{error}</p>}

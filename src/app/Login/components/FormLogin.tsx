@@ -58,7 +58,8 @@ const FormLogin: React.FC = () => {
               placeholder="E-mail"
               {...register("email")}
               error={errors?.email?.message}
-              className="bg-[#f2f2f2] outline-[#A1A1AA] !text-[#18181B]"
+              className="!bg-[#f2f2f2] !outline-[#A1A1AA] !text-[#27272A]"
+              classNameLabel="!text-[#27272A]"
               />
             <Input
               label="Senha"
@@ -66,7 +67,8 @@ const FormLogin: React.FC = () => {
               title="Senha"
               placeholder="Senha"
               {...register("password")}
-              className="bg-[#f2f2f2] outline-[#A1A1AA] !text-[#18181B]"
+              className="!bg-[#f2f2f2] !outline-[#A1A1AA] !text-[#27272A]"
+              classNameLabel="!text-[#27272A]"
             />
 
             <Button type="submit" disabled={loading}>
