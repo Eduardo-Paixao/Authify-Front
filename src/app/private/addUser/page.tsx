@@ -45,7 +45,7 @@ const addUser = () => {
         >
           <Input
             label="Nome"
-            placeholder="nome"
+            placeholder="Nome"
             {...register("name")}
             error={errors?.name?.message}
           />
