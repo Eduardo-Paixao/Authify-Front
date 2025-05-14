@@ -1,24 +1,22 @@
 "use client";
-import Button from "@/components/Button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 import LogoDev from "@/logo-dev.svg";
 import ArrowNextCircle from "@/arrow-next-circle.svg";
+import Link from "next/link";
 
 export default function Home() {
-  const { push } = useRouter();
 
   return (
     <div>
       <div className="flex w-full md:h-screen  justify-center items-center flex-col p-4">
-        <div className="w-full max-w-[1440px] flex flex-col md:flex-row max-h-[calc(100vh-88px)] items-center bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row h-[calc(100vh-275px)] items-center bg-[#F2ECFF]/85 border-4 border-[#8257E5] rounded-[73px]">
           <Image
             alt="banner-second"
             src={LogoDev}
             className="w-[200px] sm:w-[300px]"
           />
-          <section className="p-4 mb-8 w-full flex flex-col gap-4 xs:text-xl sm:text-2xl text-[#000] overflow-auto text-ellipsis ">
+          <section className="p-4 max-h-[500px] w-full flex flex-col gap-4 xs:text-xl sm:text-3xl/10 text-[#000] overflow-auto text-ellipsis">
             <strong>
               Olá, eu sou o{" "}
               <span className="text-[#8257E5]">Eduardo Paixão.</span>
@@ -38,17 +36,17 @@ export default function Home() {
             </span>
           </section>
         </div>
-        <Button
+        <Link
           title="arrow-prev-circle"
-          className="cursor-pointer hover:brightness-120 bg-transparent"
-          onClick={() => push("Login")}
+          className="cursor-pointer hover:brightness-120 bg-transparent mt-4"
+          href='Login'
         >
           <Image
             alt="arrow-prev-circle"
             src={ArrowNextCircle}
             className="xs:w-10"
           />
-        </Button>
+        </Link>
       </div>
     </div>
   );
