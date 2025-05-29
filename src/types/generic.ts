@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import { ApolloQueryResult, OperationVariables } from "@apollo/client";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type ProviderProps = {
   children: ReactNode;
@@ -12,5 +13,14 @@ export interface UserProps {
     id: number;
   }[];
 }
+export interface UserPaginationProps {
+  users: UserProps[];
+  hasMore: boolean;
+  totalCount: number;
+}
 
-
+export interface UserPaginationContextProps{
+  refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<any>>
+  setPage: Dispatch<SetStateAction<number>>
+  data:UserPaginationProps
+}

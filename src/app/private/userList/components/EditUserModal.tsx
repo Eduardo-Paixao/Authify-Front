@@ -8,7 +8,7 @@ import { useUserForm } from "@/hooks/useUserForm";
 import { useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useRef } from "react";
 import { EditUserModalProps, FormDataProps } from "./types";
-import { UserContext } from "@/contexts/userContext";
+import {  currentUserContext } from "@/contexts/CurrentUserContext";
 
 const EditUserModal: React.FC<EditUserModalProps> = ({
   isOpen,
@@ -18,7 +18,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const { showError, showSuccess } = useToastfy();
-  const { roles, email } = useContext(UserContext);
+  const { roles, email } = useContext(currentUserContext);
   const isCurrentUser = email === user?.email;
   const isUpdatePermission = roles[0].name === 'read' || isCurrentUser;
 

@@ -4,14 +4,21 @@ import { useQuery } from "@apollo/client";
 import Image from "next/image";
 import AddUserIcon from "@/undraw_updates_wm27.svg";
 
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { UserProps } from "@/types/generic";
 import Table from "./components/Table";
 import EditUserModal from "./components/EditUserModal";
+import { UserListContext } from "@/contexts/userListContext";
 
 export default function userList() {
-  const { data, refetch } = useQuery(GET_USERS);
+  // const { data, refetch } = useQuery(GET_USERS,{
+  //   variables:{
+  //     page:1,
+  //     limit:3
+  //   }
+  // });
+  const {data, refetch} = useContext(UserListContext)
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<UserProps | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -40,7 +47,7 @@ export default function userList() {
   return (
     <>
       <div className="flex items-center justify-center w-full mt-5 relative">
-        <Table handleUseredit={handleUseredit} users={data.users} />
+        <Table handleUseredit={handleUseredit} />
         <EditUserModal
           isOpen={isOpen}
           refetch={refetch}

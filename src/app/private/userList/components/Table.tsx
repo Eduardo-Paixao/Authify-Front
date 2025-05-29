@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { UserProps } from "@/types/generic";
 import EditIcon from "@/edit-icon.svg";
 import Image from "next/image";
 import { TableProps } from "./types";
+import { PaginationComponent } from "@/components/Pagination";
+import { UserListContext } from "@/contexts/userListContext";
 
-const Table: React.FC<TableProps> = ({ users, handleUseredit }) => {
+const Table: React.FC<TableProps> = ({ handleUseredit }) => {
+
+    const {data, refetch} = useContext(UserListContext)
+
   return (
-    <div className="overflow-auto w-full sm:flex sm:justify-center">
-      <table className="w-full bg-[#f1f1f1] dark:bg-[#18181B] max-w-3xl text-center border-separate border-spacing-y-4 rounded-2xl p-4 pt-0 drop-shadow-xl">
+    <div className="overflow-auto text-center max-w-3xl flex-col rounded-2xl bg-[#f1f1f1] dark:bg-[#18181B] w-full sm:flex sm:justify-center drop-shadow-xl  p-4 pt-0">
+      <table className="w-full border-separate border-spacing-y-4 ">
         <thead className="text-[#553a93] dark:text-[#ffffff]">
           <tr>
             <th className="px-4 py-2">Nome</th>
@@ -17,8 +22,11 @@ const Table: React.FC<TableProps> = ({ users, handleUseredit }) => {
           </tr>
         </thead>
         <tbody>
-          {users?.map((user: UserProps, index: number) => (
-            <tr className="bg-[#553a93] dark:bg-[#27272A] hover:brightness-125 " key={index}>
+          {data.users?.map((user: UserProps, index: number) => (
+            <tr
+              className="bg-[#553a93] dark:bg-[#27272A] hover:brightness-125 "
+              key={index}
+            >
               <td className="px-4 py-3 rounded-l-lg overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px]">
                 {user.name}
               </td>
@@ -39,6 +47,7 @@ const Table: React.FC<TableProps> = ({ users, handleUseredit }) => {
           ))}
         </tbody>
       </table>
+      <PaginationComponent />
     </div>
   );
 };

@@ -8,22 +8,22 @@ interface UserProviderProps {
   token: string;
 }
 
-export const UserContext = createContext<UserProps>({
+export const currentUserContext = createContext<UserProps>({
   name: "",
   email: "",
   roles: [],
 });
 
-export const UserProvider = ({ children, token }: UserProviderProps) => {
+export const CurrentUserProvider = ({ children, token }: UserProviderProps) => {
   const decode = decodeJwt(token);
   const user: UserProps = decode?.user;
   return (
-    <UserContext.Provider
+    <currentUserContext.Provider
       value={{
         ...user,
       }}
     >
       {children}
-    </UserContext.Provider>
+    </currentUserContext.Provider>
   );
 };

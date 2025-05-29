@@ -1,3 +1,4 @@
+import {UserProps, UserPaginationProps} from '@/types/generic'
 export interface FormDataProps {
   name?: string;
   roles?: string | null | undefined;
@@ -13,6 +14,6 @@ export interface EditUserModalProps {
 }
 
 export interface TableProps {
-  users: UserProps[];
+  // paginatedUsers: UserPaginationProps;
   handleUseredit: (user: UserProps) => void;
 }
