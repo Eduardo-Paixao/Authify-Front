@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserProps } from "@/types/generic";
 import EditIcon from "@/edit-icon.svg";
 import Image from "next/image";
@@ -7,11 +7,9 @@ import { PaginationComponent } from "@/components/Pagination";
 import { UserListContext } from "@/contexts/userListContext";
 
 const Table: React.FC<TableProps> = ({ handleUseredit }) => {
-
-    const {data, refetch} = useContext(UserListContext)
-
+  const { data, loading } = useContext(UserListContext);
   return (
-    <div className="overflow-auto text-center max-w-3xl flex-col rounded-2xl bg-[#f1f1f1] dark:bg-[#18181B] w-full sm:flex sm:justify-center drop-shadow-xl  p-4 pt-0">
+    <div className="overflow-auto text-center max-w-3xl flex-col rounded-2xl bg-[#f1f1f1] dark:bg-[#18181B] w-full flex drop-shadow-xl  p-4 pt-0 min-h-[334px] justify-between">
       <table className="w-full border-separate border-spacing-y-4 ">
         <thead className="text-[#553a93] dark:text-[#ffffff]">
           <tr>
@@ -22,7 +20,7 @@ const Table: React.FC<TableProps> = ({ handleUseredit }) => {
           </tr>
         </thead>
         <tbody>
-          {data.users?.map((user: UserProps, index: number) => (
+          {data?.users?.map((user: UserProps, index: number) => (
             <tr
               className="bg-[#553a93] dark:bg-[#27272A] hover:brightness-125 "
               key={index}
@@ -47,6 +45,12 @@ const Table: React.FC<TableProps> = ({ handleUseredit }) => {
           ))}
         </tbody>
       </table>
+      {(loading && !data?.users.length) && (
+        <div className="flex items-center justify-center gap-4 w-full mb-4">
+          <div className="w-8 h-8 border-3 border-[#553a93]/30 border-t-[#553a93] rounded-full animate-spin" />
+          <p className="text-[#553a93] animate-pulse">Carregando...</p>
+        </div>
+      )}
       <PaginationComponent />
     </div>
   );

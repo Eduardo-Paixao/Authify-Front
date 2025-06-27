@@ -10,7 +10,6 @@ export interface EditUserModalProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   user: UserProps | null;
-  refetch: () => void;
 }
 
 export interface TableProps {

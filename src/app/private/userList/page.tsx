@@ -12,13 +12,7 @@ import EditUserModal from "./components/EditUserModal";
 import { UserListContext } from "@/contexts/userListContext";
 
 export default function userList() {
-  // const { data, refetch } = useQuery(GET_USERS,{
-  //   variables:{
-  //     page:1,
-  //     limit:3
-  //   }
-  // });
-  const {data, refetch} = useContext(UserListContext)
+  const { data, loading } = useContext(UserListContext);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<UserProps | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -29,11 +23,7 @@ export default function userList() {
     setIsOpen(true);
   };
 
-  useEffect(() => {
-    refetch()
-  }, []);
-
-  if (!data) {
+  if (!loading && !data ) {
     return (
       <div className="flex flex-col justify-center items-center gap-5 mt-5">
         <strong className="text-3xl">
@@ -48,12 +38,7 @@ export default function userList() {
     <>
       <div className="flex items-center justify-center w-full mt-5 relative">
         <Table handleUseredit={handleUseredit} />
-        <EditUserModal
-          isOpen={isOpen}
-          refetch={refetch}
-          setIsOpen={setIsOpen}
-          user={user}
-        />
+        <EditUserModal isOpen={isOpen} setIsOpen={setIsOpen} user={user} />
       </div>
     </>
   );

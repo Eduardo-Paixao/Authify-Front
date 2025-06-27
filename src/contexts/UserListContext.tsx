@@ -1,8 +1,12 @@
 "use client";
 import { GET_USERS } from "@/graphql/queries/userQueries";
-import { UserPaginationContextProps, UserPaginationProps, UserProps } from "@/types/generic";
+import {
+  UserPaginationContextProps,
+  UserPaginationProps,
+  UserProps,
+} from "@/types/generic";
 import { decodeJwt } from "@/utils/generic";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import {
   createContext,
   Dispatch,
@@ -16,23 +20,39 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
-export const UserListContext = createContext<UserPaginationContextProps>({} as UserPaginationContextProps);
+export const UserListContext = createContext<UserPaginationContextProps>(
+  {} as UserPaginationContextProps
+);
 
 export const UserListProvider = ({ children }: UserProviderProps) => {
   const [page, setPage] = useState(1);
-  const { data, refetch } = useQuery(GET_USERS, {
-    variables: {
-      page: page,
-      limit: 3,
-    },
+  const limit = 3;
+  const { data, loading, refetch } = useQuery(GET_USERS,{
+    variables: { page, limit },
   });
+
+  const totalPages = Math.ceil(data?.paginatedUsers?.totalCount / limit);
+  const hasMore = page < totalPages;
+  const hasPrevious = page > 1;
+
+  useEffect(() => {
+    refetch({
+      variables: { page, limit },
+    });
+  }, [page]);
 
   return (
     <UserListContext.Provider
       value={{
+        page,
+        hasMore,
+        totalPages,
+        hasPrevious,
         setPage,
+        // fetchUsers,
         refetch,
-        data: data.paginatedUsers,
+        data: data?.paginatedUsers,
+        loading,
       }}
     >
       {children}
