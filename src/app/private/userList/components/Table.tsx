@@ -45,10 +45,12 @@ const Table: React.FC<TableProps> = ({ handleUseredit }) => {
           ))}
         </tbody>
       </table>
-      {(loading && !data?.users.length) && (
+      {loading && !data?.users.length && (
         <div className="flex items-center justify-center gap-4 w-full mb-4">
-          <div className="w-8 h-8 border-3 border-[#553a93]/30 border-t-[#553a93] rounded-full animate-spin" />
-          <p className="text-[#553a93] animate-pulse">Carregando...</p>
+          <div className="w-8 h-8 border-3 border-[#553a93]/30 border-t-[#553a93] dark:border-white/30 dark:border-t-white rounded-full animate-spin" />
+          <p className="text-[#553a93] dark:text-[#ffffff] animate-pulse">
+            Carregando...
+          </p>
         </div>
       )}
       <PaginationComponent />

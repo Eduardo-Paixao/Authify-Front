@@ -49,7 +49,6 @@ export const UserListProvider = ({ children }: UserProviderProps) => {
         totalPages,
         hasPrevious,
         setPage,
-        // fetchUsers,
         refetch,
         data: data?.paginatedUsers,
         loading,
