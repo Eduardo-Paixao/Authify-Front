@@ -16,7 +16,7 @@ interface UserProviderProps {
 }
 
 
-export const userListContext = createContext<UserPaginationContextProps>(
+export const UserListContext = createContext<UserPaginationContextProps>(
   {} as UserPaginationContextProps
 );
 
@@ -39,7 +39,7 @@ export const UserListProvider = ({ children }: UserProviderProps) => {
   }, [page]);
 
   return (
-    <userListContext.Provider
+    <UserListContext.Provider
       value={{
         page,
         hasMore,
@@ -52,6 +52,6 @@ export const UserListProvider = ({ children }: UserProviderProps) => {
       }}
     >
       {children}
-    </userListContext.Provider>
+    </UserListContext.Provider>
   );
 };

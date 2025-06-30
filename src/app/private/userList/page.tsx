@@ -7,10 +7,10 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 import { UserProps } from "@/types/generic";
 import Table from "./components/Table";
 import EditUserModal from "./components/EditUserModal";
-import { userListContext } from "@/contexts/userListContext";
+import { UserListContext } from "@/contexts/UserListContext";
 
 export default function userList() {
-  const { data, loading } = useContext(userListContext);
+  const { data, loading } = useContext(UserListContext);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<UserProps | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);

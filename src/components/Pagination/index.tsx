@@ -7,12 +7,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { userListContext } from "@/contexts/userListContext";
+import { UserListContext } from "@/contexts/UserListContext";
 import { pagination } from "@/utils/generic";
 import { useContext } from "react";
 
 export function PaginationComponent() {
-  const { setPage, hasMore, hasPrevious, page, totalPages } = useContext(userListContext);
+  const { setPage, hasMore, hasPrevious, page, totalPages } = useContext(UserListContext);
   const paginationItems: (string | number)[] = pagination(page, totalPages, 1);
 
   return (

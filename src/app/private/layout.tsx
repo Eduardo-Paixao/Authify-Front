@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import { CurrentUserProvider } from "@/contexts/CurrentUserContext";
-import { UserListProvider } from "@/contexts/userListContext";
+import { UserListProvider } from "@/contexts/UserListContext";
 import { cookies } from "next/headers";
 import React, { ReactNode } from "react";
 
