@@ -15,6 +15,7 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
+
 export const userListContext = createContext<UserPaginationContextProps>(
   {} as UserPaginationContextProps
 );
