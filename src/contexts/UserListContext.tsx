@@ -31,6 +31,7 @@ export const UserListProvider = ({ children }: UserProviderProps) => {
     variables: { page, limit },
   });
 
+  
   const totalPages = Math.ceil(data?.paginatedUsers?.totalCount / limit);
   const hasMore = page < totalPages;
   const hasPrevious = page > 1;
