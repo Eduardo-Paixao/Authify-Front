@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserProps } from "@/types/generic";
 import EditIcon from "@/edit-icon.svg";
 import Image from "next/image";
 import { TableProps } from "./types";
 import { PaginationComponent } from "@/components/Pagination";
-import { UserListContext } from "@/contexts/userListContext";
+import { userListContext } from "@/contexts/userListContext";
 
 const Table: React.FC<TableProps> = ({ handleUseredit }) => {
-  const { data, loading } = useContext(UserListContext);
+  const { data, loading } = useContext(userListContext);
   return (
     <div className="overflow-auto text-center max-w-3xl flex-col rounded-2xl bg-[#f1f1f1] dark:bg-[#18181B] w-full flex drop-shadow-xl  p-4 pt-0 min-h-[334px] justify-between">
       <table className="w-full border-separate border-spacing-y-4 ">

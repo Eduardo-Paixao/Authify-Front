@@ -2,16 +2,11 @@
 import { GET_USERS } from "@/graphql/queries/userQueries";
 import {
   UserPaginationContextProps,
-  UserPaginationProps,
-  UserProps,
 } from "@/types/generic";
-import { decodeJwt } from "@/utils/generic";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useEffect,
   useState,
 } from "react";
@@ -20,7 +15,7 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
-export const UserListContext = createContext<UserPaginationContextProps>(
+export const userListContext = createContext<UserPaginationContextProps>(
   {} as UserPaginationContextProps
 );
 
@@ -43,7 +38,7 @@ export const UserListProvider = ({ children }: UserProviderProps) => {
   }, [page]);
 
   return (
-    <UserListContext.Provider
+    <userListContext.Provider
       value={{
         page,
         hasMore,
@@ -56,6 +51,6 @@ export const UserListProvider = ({ children }: UserProviderProps) => {
       }}
     >
       {children}
-    </UserListContext.Provider>
+    </userListContext.Provider>
   );
 };

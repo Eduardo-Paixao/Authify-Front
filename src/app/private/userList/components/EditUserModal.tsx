@@ -9,7 +9,7 @@ import { useMutation } from "@apollo/client";
 import React, { useContext, useEffect, useRef } from "react";
 import { EditUserModalProps, FormDataProps } from "./types";
 import {  currentUserContext } from "@/contexts/CurrentUserContext";
-import { UserListContext } from "@/contexts/userListContext";
+import { userListContext } from "@/contexts/userListContext";
 
 const EditUserModal: React.FC<EditUserModalProps> = ({
   isOpen,
@@ -19,7 +19,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const { showError, showSuccess } = useToastfy();
   const { roles, email } = useContext(currentUserContext);
-  const { refetch, page } = useContext(UserListContext);
+  const { refetch, page } = useContext(userListContext);
   const isCurrentUser = email === user?.email;
   const isUpdatePermission = roles[0].name === 'read' || isCurrentUser;
 

@@ -1,18 +1,16 @@
 "use client";
-import { GET_USERS } from "@/graphql/queries/userQueries";
-import { useQuery } from "@apollo/client";
 import Image from "next/image";
 import AddUserIcon from "@/undraw_updates_wm27.svg";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { UserProps } from "@/types/generic";
 import Table from "./components/Table";
 import EditUserModal from "./components/EditUserModal";
-import { UserListContext } from "@/contexts/userListContext";
+import { userListContext } from "@/contexts/userListContext";
 
 export default function userList() {
-  const { data, loading } = useContext(UserListContext);
+  const { data, loading } = useContext(userListContext);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<UserProps | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
